@@ -1,0 +1,43 @@
+Remove discovered hosts
+
+1 - Get authentication key
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0","method": "user.login",
+    "params": {"user": "Admin","password": "zabbix"},            
+    "id": 1,"auth": null
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oPw '(?<=result":\s")[^"]+'
+ 
+b409668debc46b73205989bcbe4d41e1
+
+
+2 Asks zabbix for the all the hosts in the group discovered hosts
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0", "method": "hostgroup.get",
+    "params": {"output": "extend","selectHosts": ["host"],
+    "filter": {"name": ["Discovered hosts"]}
+    },"id": 1, "auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oP '(?<=hostid":\s")[0-9]+' > hostlist_discovered_hosts_$1.json
+
+hostlist=$(grep -oP '(?<=hostid":\s")[0-9]+' RestQuery_Template_ServerMonitoring_hosts_list_$1.json)
+echo Hoslist $hostlist
+echo $hostlist > hostlist
+
+
+huge list
+
+
+3 - delete the hosts in the list list_discovered_host_ids.lst
+
+for hostid
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "host.delete",
+    "params": ["10152"],
+    "auth": "b409668debc46b73205989bcbe4d41e1",
+    "id": 1
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+

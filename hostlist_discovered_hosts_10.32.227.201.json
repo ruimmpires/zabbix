@@ -1,0 +1,10 @@
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "groupid": "5",
+            "hosts": []
+        }
+    ],
+    "id": 1
+}

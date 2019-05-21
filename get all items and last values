@@ -1,0 +1,165 @@
+1 - Get authentication key
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0","method": "user.login",
+    "params": {"user": "Admin","password": "zabbix"},            
+    "id": 1,"auth": null
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oPw '(?<=result":\s")[^"]+'
+ 
+b409668debc46b73205989bcbe4d41e1
+------------------------------------------------------------------
+2 Asks zabbix for the templateID of a given template name
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0", "method": "template.get",
+    "params": {"output": ["host"],
+    "filter": {"host": ["Template ServerMonitoring"]}
+    },"id": 1, "auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oP '(?<=templateid":\s")[0-9]+'
+ 
+10123
+------------------------------------------------------------------
+3 - Asks zabbix for all the host ids which are associated with the template ID
+ 
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0", "method": "host.get",
+    "params": {"output": ["hostid", "host", "itemids"],"selectInterfaces": ["ip"], "templateids":"10123"},
+    "id": 1,"auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oP '(?<=hostid":\s")[0-9]+'
+ 
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0", "method": "host.get",
+    "params": {"output": ["hostid", "host", "itemids"],"selectInterfaces": ["ip"], "templateids":"10123"},
+    "id": 1,"auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+ 
+10109
+10115
+10116
+10112
+10108
+10117
+10111
+10127
+10151
+------------------------------------------------------------------
+ 
+4 - Asks zabbix for all the itemids, keys of each host id. The below case is coded to look for the 10109
+ 
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "item.get",
+    "params": {
+        "output":
+[
+            "hostid",
+            "itemid",
+            "snmp_oid",
+            "name",
+            "key_",
+            "lastvalue"
+        ],
+"hostids": "10109",
+"sortfield": "key_"
+    },
+    "id": 1,
+    "auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool > RestQuery_Template_ServerMonitoring_10.32.227.201_hostid_10109.json
+ 
+see method4.csv
+ 
+only a small portion below.
+The full output is attached RestQuery_Template_ServerMonitoring_10.32.227.201_hostid_10109.json
+....
+{
+            "itemid": "26417",
+            "hostid": "10109",
+            "snmp_oid": "HOST-RESOURCES-MIB::hrStorageAllocationUnits.31",
+            "name": "Allocation units for memory $1",
+            "key_": "MemhrStorageAllocationUnits[/]",
+            "lastvalue": "4096"
+        },
+        {
+            "itemid": "26423",
+            "hostid": "10109",
+            "snmp_oid": "HOST-RESOURCES-MIB::hrStorageAllocationUnits.61",
+            "name": "Allocation units for memory $1",
+            "key_": "MemhrStorageAllocationUnits[/d/oss/global]",
+            "lastvalue": "1048576"
+        },
+....
+Here we can confirm that each itemid is unique and is not assiciated with a counter but rather to a counter.instance. The counter is the "key"
+----------------------------------------------------------------------
+ 
+5 - New option.
+Get all instances of a specific counter for one host associated with a given template.
+Asks zabbix for all the itemids, keys of each host id and each key. This can be done with 2 nested iteractions given the input from the mediation with a list of keys (counters) The below case is coded to look for the 10109 and counter MemhrStorageAllocationUnits:
+ 
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "item.get",
+    "params": {
+        "output":
+[
+            "hostid",
+            "itemid",
+            "snmp_oid",
+            "name",
+            "key_",
+            "lastvalue"
+        ],
+"hostids": "10109",
+"search": {
+            "key_": "MemhrStorageAllocationUnits"
+        },
+"sortfield": "key_"
+    },
+    "id": 1,
+    "auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+ 
+ 
+see method5.csv
+  
+-------------------------------------------------------------
+6 - New new option.
+Get all instances of a specific counter for all hosts associated with a given template.
+Asks zabbix for all the itemids, of all hosts for a set of keys. This can be done with 2 nested iteractions given the input from the mediation with a list of keys (counters). The below case is coded to look for the 10109 and counters from memory measurement:
+
+ 
+see method6.csv
+ 
+
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "item.get",
+    "params": {
+        "output":
+[
+            "hostid",
+            "itemid",
+            "snmp_oid",
+            "name",
+            "key_",
+            "lastvalue"
+        ],
+"hostids": ["10109", "10115","10116", "10112","10108", "10117","10111", "10127","10151"],
+"search": {"key_": ["MemhrStorageSize", "MemhrStorageUsed", "MemhrStorageAllocationUnits"]},
+"sortfield": "key_",
+"searchByAny": true
+    },
+    "id": 1,
+    "auth": "b409668debc46b73205989bcbe4d41e1"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+
+
+
+
+
+

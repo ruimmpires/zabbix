@@ -1,0 +1,358 @@
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "itemid": "42301",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.25.2.2.0",
+            "name": "hrMemorySize",
+            "key_": "HOST-RESOURCES-MIB.hrMemorySize",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42302",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.13.0",
+            "name": "icmpInAddrMaskReps",
+            "key_": "IP-MIB.icmpInAddrMaskReps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42303",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.12.0",
+            "name": "icmpInAddrMasks",
+            "key_": "IP-MIB.icmpInAddrMasks",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42304",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.3.0",
+            "name": "icmpInDestUnreachs",
+            "key_": "IP-MIB.icmpInDestUnreachs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42305",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.9.0",
+            "name": "icmpInEchoReps",
+            "key_": "IP-MIB.icmpInEchoReps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42306",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.8.0",
+            "name": "icmpInEchos",
+            "key_": "IP-MIB.icmpInEchos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42307",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.2.0",
+            "name": "icmpInErrors",
+            "key_": "IP-MIB.icmpInErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42308",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.1.0",
+            "name": "icmpInMsgs",
+            "key_": "IP-MIB.icmpInMsgs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42309",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.5.0",
+            "name": "icmpInParmProbs",
+            "key_": "IP-MIB.icmpInParmProbs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42310",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.7.0",
+            "name": "icmpInRedirects",
+            "key_": "IP-MIB.icmpInRedirects",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42311",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.6.0",
+            "name": "icmpInSrcQuenchs",
+            "key_": "IP-MIB.icmpInSrcQuenchs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42312",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.4.0",
+            "name": "icmpInTimeExcds",
+            "key_": "IP-MIB.icmpInTimeExcds",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42313",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.11.0",
+            "name": "icmpInTimestampReps",
+            "key_": "IP-MIB.icmpInTimestampReps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42314",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.10.0",
+            "name": "icmpInTimestamps",
+            "key_": "IP-MIB.icmpInTimestamps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42315",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.26.0",
+            "name": "icmpOutAddrMaskReps",
+            "key_": "IP-MIB.icmpOutAddrMaskReps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42316",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.25.0",
+            "name": "icmpOutAddrMasks",
+            "key_": "IP-MIB.icmpOutAddrMasks",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42317",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.16.0",
+            "name": "icmpOutDestUnreachs",
+            "key_": "IP-MIB.icmpOutDestUnreachs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42318",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.22.0",
+            "name": "icmpOutEchoReps",
+            "key_": "IP-MIB.icmpOutEchoReps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42319",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.21.0",
+            "name": "icmpOutEchos",
+            "key_": "IP-MIB.icmpOutEchos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42320",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.15.0",
+            "name": "icmpOutErrors",
+            "key_": "IP-MIB.icmpOutErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42321",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.14.0",
+            "name": "icmpOutMsgs",
+            "key_": "IP-MIB.icmpOutMsgs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42322",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.18.0",
+            "name": "icmpOutParmProbs",
+            "key_": "IP-MIB.icmpOutParmProbs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42323",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.20.0",
+            "name": "icmpOutRedirects",
+            "key_": "IP-MIB.icmpOutRedirects",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42324",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.19.0",
+            "name": "icmpOutSrcQuenchs",
+            "key_": "IP-MIB.icmpOutSrcQuenchs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42325",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.17.0",
+            "name": "icmpOutTimeExcds",
+            "key_": "IP-MIB.icmpOutTimeExcds",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42326",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.24.0",
+            "name": "icmpOutTimestampReps",
+            "key_": "IP-MIB.icmpOutTimestampReps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42327",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.5.23.0",
+            "name": "icmpOutTimestamps",
+            "key_": "IP-MIB.icmpOutTimestamps",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42328",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.6.0",
+            "name": "ipForwDatagrams",
+            "key_": "IP-MIB.ipForwDatagrams",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42329",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.5.0",
+            "name": "ipInAddrErrors",
+            "key_": "IP-MIB.ipInAddrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42330",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.9.0",
+            "name": "ipInDelivers",
+            "key_": "IP-MIB.ipInDelivers",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42331",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.8.0",
+            "name": "ipInDiscards",
+            "key_": "IP-MIB.ipInDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42332",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.4.0",
+            "name": "ipInHdrErrors",
+            "key_": "IP-MIB.ipInHdrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42333",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.3.0",
+            "name": "ipInReceives",
+            "key_": "IP-MIB.ipInReceives",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42334",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.7.0",
+            "name": "ipInUnknownProtos",
+            "key_": "IP-MIB.ipInUnknownProtos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42335",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.11.0",
+            "name": "ipOutDiscards",
+            "key_": "IP-MIB.ipOutDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42336",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.12.0",
+            "name": "ipOutNoRoutes",
+            "key_": "IP-MIB.ipOutNoRoutes",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42337",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.10.0",
+            "name": "ipOutRequests",
+            "key_": "IP-MIB.ipOutRequests",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42338",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.16.0",
+            "name": "ipReasmFails",
+            "key_": "IP-MIB.ipReasmFails",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42339",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.15.0",
+            "name": "ipReasmOKs",
+            "key_": "IP-MIB.ipReasmOKs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42340",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.4.14.0",
+            "name": "ipReasmReqds",
+            "key_": "IP-MIB.ipReasmReqds",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "42341",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.1.1.0",
+            "name": "sysDescr",
+            "key_": "SNMPv2-MIB.sysDescr",
+            "lastvalue": "Linux dena-devops 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64"
+        },
+        {
+            "itemid": "42342",
+            "hostid": "16716",
+            "snmp_oid": ".1.3.6.1.2.1.1.5.0",
+            "name": "sysName",
+            "key_": "SNMPv2-MIB.sysName",
+            "lastvalue": "dena-devops"
+        },
+        {
+            "itemid": "42343",
+            "hostid": "16716",
+            "snmp_oid": "",
+            "name": "ICMP loss",
+            "key_": "icmppingloss",
+            "lastvalue": "0.0000"
+        },
+        {
+            "itemid": "42344",
+            "hostid": "16716",
+            "snmp_oid": "",
+            "name": "ICMP response time",
+            "key_": "icmppingsec",
+            "lastvalue": "0.0059"
+        }
+    ],
+    "id": 1
+}

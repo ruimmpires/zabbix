@@ -1,0 +1,472 @@
+AUTHENTICATION
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0","method": "user.login",
+    "params": {"user": "Admin","password": "zabbix"},            
+    "id": 1,"auth": null
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oPw '(?<=result":\s")[^"]+'
+
+ANSWER:
+51868a73a28d5c2674e121bbc7cb9169
+
+
+CREATE A ACTION RULE
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "drule.create",
+    "params": {
+        "name": "Juniper discovery2",
+        "proxy_hostid": "0",
+        "iprange": "10.9.227.0/24",
+        "delay": "300",
+        "nextcheck": "0",
+        "status": "0",
+        "dchecks": [
+            {
+                "type": "11",
+                "key_": "1.3.6.1.4.1.2636.3.1.2.0",
+                "snmp_community": "public",
+                "ports": "161"
+            }
+        ]
+    },
+    "auth": "51868a73a28d5c2674e121bbc7cb9169",
+    "id": 1
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+
+ANSWER:
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "druleids": [
+            "15"
+        ]
+    },
+    "id": 1
+}
+
+
+
+
+
+READ ACTION RULES
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "action.get",
+    "params": {
+        "output": "extend",
+        "selectOperations": "extend",
+        "selectFilter": "extend",
+        "filter": {
+            "eventsource": 1
+        }
+    },
+    "auth": "51868a73a28d5c2674e121bbc7cb9169",
+    "id": 1
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+ANSWER:
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "actionid": "2",
+            "name": "Auto discovery. Linux servers.",
+            "eventsource": "1",
+            "status": "1",
+            "esc_period": "0",
+            "def_shortdata": "",
+            "def_longdata": "",
+            "recovery_msg": "0",
+            "r_shortdata": "",
+            "r_longdata": "",
+            "filter": {
+                "evaltype": "0",
+                "formula": "",
+                "conditions": [
+                    {
+                        "conditiontype": "10",
+                        "operator": "0",
+                        "value": "0",
+                        "formulaid": "B"
+                    },
+                    {
+                        "conditiontype": "8",
+                        "operator": "0",
+                        "value": "9",
+                        "formulaid": "C"
+                    },
+                    {
+                        "conditiontype": "12",
+                        "operator": "2",
+                        "value": "Linux",
+                        "formulaid": "A"
+                    }
+                ],
+                "eval_formula": "A and B and C"
+            },
+            "operations": [
+                {
+                    "operationid": "1",
+                    "actionid": "2",
+                    "operationtype": "6",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "optemplate": [
+                        {
+                            "operationid": "1",
+                            "templateid": "10001"
+                        }
+                    ]
+                },
+                {
+                    "operationid": "2",
+                    "actionid": "2",
+                    "operationtype": "4",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "opgroup": [
+                        {
+                            "operationid": "2",
+                            "groupid": "2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "actionid": "10",
+            "name": "SNMP devices",
+            "eventsource": "1",
+            "status": "1",
+            "esc_period": "0",
+            "def_shortdata": "Discovery: {DISCOVERY.DEVICE.STATUS} {DISCOVERY.DEVICE.IPADDRESS}",
+            "def_longdata": "Discovery rule: {DISCOVERY.RULE.NAME}\r\n\r\nDevice IP:{DISCOVERY.DEVICE.IPADDRESS}\r\nDevice DNS: {DISCOVERY.DEVICE.DNS}\r\nDevice status: {DISCOVERY.DEVICE.STATUS}\r\nDevice uptime: {DISCOVERY.DEVICE.UPTIME}\r\n\r\nDevice service name: {DISCOVERY.SERVICE.NAME}\r\nDevice service port: {DISCOVERY.SERVICE.PORT}\r\nDevice service status: {DISCOVERY.SERVICE.STATUS}\r\nDevice service uptime: {DISCOVERY.SERVICE.UPTIME}",
+            "recovery_msg": "0",
+            "r_shortdata": "",
+            "r_longdata": "",
+            "filter": {
+                "evaltype": "2",
+                "formula": "",
+                "conditions": [
+                    {
+                        "conditiontype": "19",
+                        "operator": "0",
+                        "value": "9",
+                        "formulaid": "A"
+                    },
+                    {
+                        "conditiontype": "19",
+                        "operator": "0",
+                        "value": "8",
+                        "formulaid": "B"
+                    },
+                    {
+                        "conditiontype": "8",
+                        "operator": "0",
+                        "value": "11",
+                        "formulaid": "C"
+                    }
+                ],
+                "eval_formula": "(A or B) or C"
+            },
+            "operations": [
+                {
+                    "operationid": "14",
+                    "actionid": "10",
+                    "operationtype": "2",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": []
+                },
+                {
+                    "operationid": "15",
+                    "actionid": "10",
+                    "operationtype": "4",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "opgroup": [
+                        {
+                            "operationid": "15",
+                            "groupid": "5"
+                        },
+                        {
+                            "operationid": "15",
+                            "groupid": "13"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "actionid": "11",
+            "name": "cisco",
+            "eventsource": "1",
+            "status": "0",
+            "esc_period": "0",
+            "def_shortdata": "Discovery: {DISCOVERY.DEVICE.STATUS} {DISCOVERY.DEVICE.IPADDRESS}",
+            "def_longdata": "Discovery rule: {DISCOVERY.RULE.NAME}\r\n\r\nDevice IP:{DISCOVERY.DEVICE.IPADDRESS}\r\nDevice DNS: {DISCOVERY.DEVICE.DNS}\r\nDevice status: {DISCOVERY.DEVICE.STATUS}\r\nDevice uptime: {DISCOVERY.DEVICE.UPTIME}\r\n\r\nDevice service name: {DISCOVERY.SERVICE.NAME}\r\nDevice service port: {DISCOVERY.SERVICE.PORT}\r\nDevice service status: {DISCOVERY.SERVICE.STATUS}\r\nDevice service uptime: {DISCOVERY.SERVICE.UPTIME}",
+            "recovery_msg": "0",
+            "r_shortdata": "",
+            "r_longdata": "",
+            "filter": {
+                "evaltype": "0",
+                "formula": "",
+                "conditions": [
+                    {
+                        "conditiontype": "19",
+                        "operator": "0",
+                        "value": "24",
+                        "formulaid": "A"
+                    }
+                ],
+                "eval_formula": "A"
+            },
+            "operations": [
+                {
+                    "operationid": "18",
+                    "actionid": "11",
+                    "operationtype": "2",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": []
+                },
+                {
+                    "operationid": "19",
+                    "actionid": "11",
+                    "operationtype": "4",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "opgroup": [
+                        {
+                            "operationid": "19",
+                            "groupid": "5"
+                        },
+                        {
+                            "operationid": "19",
+                            "groupid": "13"
+                        },
+                        {
+                            "operationid": "19",
+                            "groupid": "15"
+                        }
+                    ]
+                },
+                {
+                    "operationid": "26",
+                    "actionid": "11",
+                    "operationtype": "6",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "optemplate": [
+                        {
+                            "operationid": "26",
+                            "templateid": "16717"
+                        },
+                        {
+                            "operationid": "26",
+                            "templateid": "16724"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "actionid": "12",
+            "name": "Mimic simulators",
+            "eventsource": "1",
+            "status": "0",
+            "esc_period": "0",
+            "def_shortdata": "Discovery: {DISCOVERY.DEVICE.STATUS} {DISCOVERY.DEVICE.IPADDRESS}",
+            "def_longdata": "Discovery rule: {DISCOVERY.RULE.NAME}\r\n\r\nDevice IP:{DISCOVERY.DEVICE.IPADDRESS}\r\nDevice DNS: {DISCOVERY.DEVICE.DNS}\r\nDevice status: {DISCOVERY.DEVICE.STATUS}\r\nDevice uptime: {DISCOVERY.DEVICE.UPTIME}\r\n\r\nDevice service name: {DISCOVERY.SERVICE.NAME}\r\nDevice service port: {DISCOVERY.SERVICE.PORT}\r\nDevice service status: {DISCOVERY.SERVICE.STATUS}\r\nDevice service uptime: {DISCOVERY.SERVICE.UPTIME}",
+            "recovery_msg": "0",
+            "r_shortdata": "",
+            "r_longdata": "",
+            "filter": {
+                "evaltype": "1",
+                "formula": "",
+                "conditions": [
+                    {
+                        "conditiontype": "19",
+                        "operator": "0",
+                        "value": "9",
+                        "formulaid": "A"
+                    },
+                    {
+                        "conditiontype": "18",
+                        "operator": "0",
+                        "value": "9",
+                        "formulaid": "B"
+                    },
+                    {
+                        "conditiontype": "10",
+                        "operator": "0",
+                        "value": "0",
+                        "formulaid": "C"
+                    },
+                    {
+                        "conditiontype": "8",
+                        "operator": "0",
+                        "value": "11",
+                        "formulaid": "D"
+                    }
+                ],
+                "eval_formula": "A and B and C and D"
+            },
+            "operations": [
+                {
+                    "operationid": "21",
+                    "actionid": "12",
+                    "operationtype": "2",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": []
+                },
+                {
+                    "operationid": "22",
+                    "actionid": "12",
+                    "operationtype": "4",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "opgroup": [
+                        {
+                            "operationid": "22",
+                            "groupid": "13"
+                        }
+                    ]
+                },
+                {
+                    "operationid": "24",
+                    "actionid": "12",
+                    "operationtype": "8",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": []
+                },
+                {
+                    "operationid": "27",
+                    "actionid": "12",
+                    "operationtype": "6",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "optemplate": [
+                        {
+                            "operationid": "27",
+                            "templateid": "16717"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "actionid": "13",
+            "name": "juniper",
+            "eventsource": "1",
+            "status": "0",
+            "esc_period": "0",
+            "def_shortdata": "Discovery: {DISCOVERY.DEVICE.STATUS} {DISCOVERY.DEVICE.IPADDRESS}",
+            "def_longdata": "Discovery rule: {DISCOVERY.RULE.NAME}\r\n\r\nDevice IP:{DISCOVERY.DEVICE.IPADDRESS}\r\nDevice DNS: {DISCOVERY.DEVICE.DNS}\r\nDevice status: {DISCOVERY.DEVICE.STATUS}\r\nDevice uptime: {DISCOVERY.DEVICE.UPTIME}\r\n\r\nDevice service name: {DISCOVERY.SERVICE.NAME}\r\nDevice service port: {DISCOVERY.SERVICE.PORT}\r\nDevice service status: {DISCOVERY.SERVICE.STATUS}\r\nDevice service uptime: {DISCOVERY.SERVICE.UPTIME}",
+            "recovery_msg": "0",
+            "r_shortdata": "",
+            "r_longdata": "",
+            "filter": {
+                "evaltype": "0",
+                "formula": "",
+                "conditions": [
+                    {
+                        "conditiontype": "19",
+                        "operator": "0",
+                        "value": "13",
+                        "formulaid": "A"
+                    }
+                ],
+                "eval_formula": "A"
+            },
+            "operations": [
+                {
+                    "operationid": "28",
+                    "actionid": "13",
+                    "operationtype": "2",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": []
+                },
+                {
+                    "operationid": "29",
+                    "actionid": "13",
+                    "operationtype": "4",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "opgroup": [
+                        {
+                            "operationid": "29",
+                            "groupid": "5"
+                        },
+                        {
+                            "operationid": "29",
+                            "groupid": "13"
+                        },
+                        {
+                            "operationid": "29",
+                            "groupid": "18"
+                        }
+                    ]
+                },
+                {
+                    "operationid": "30",
+                    "actionid": "13",
+                    "operationtype": "6",
+                    "esc_period": "0",
+                    "esc_step_from": "1",
+                    "esc_step_to": "1",
+                    "evaltype": "0",
+                    "opconditions": [],
+                    "optemplate": [
+                        {
+                            "operationid": "30",
+                            "templateid": "16717"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "id": 1
+}

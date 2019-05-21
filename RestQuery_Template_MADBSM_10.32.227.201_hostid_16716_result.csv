@@ -1,0 +1,45 @@
+hostid,itemid,key_,lastvalue,name,snmp_oid
+16716,42301,HOST-RESOURCES-MIB.hrMemorySize,0,hrMemorySize,.1.3.6.1.2.1.25.2.2.0
+16716,42302,IP-MIB.icmpInAddrMaskReps,0,icmpInAddrMaskReps,.1.3.6.1.2.1.5.13.0
+16716,42303,IP-MIB.icmpInAddrMasks,0,icmpInAddrMasks,.1.3.6.1.2.1.5.12.0
+16716,42304,IP-MIB.icmpInDestUnreachs,0,icmpInDestUnreachs,.1.3.6.1.2.1.5.3.0
+16716,42305,IP-MIB.icmpInEchoReps,0,icmpInEchoReps,.1.3.6.1.2.1.5.9.0
+16716,42306,IP-MIB.icmpInEchos,0,icmpInEchos,.1.3.6.1.2.1.5.8.0
+16716,42307,IP-MIB.icmpInErrors,0,icmpInErrors,.1.3.6.1.2.1.5.2.0
+16716,42308,IP-MIB.icmpInMsgs,0,icmpInMsgs,.1.3.6.1.2.1.5.1.0
+16716,42309,IP-MIB.icmpInParmProbs,0,icmpInParmProbs,.1.3.6.1.2.1.5.5.0
+16716,42310,IP-MIB.icmpInRedirects,0,icmpInRedirects,.1.3.6.1.2.1.5.7.0
+16716,42311,IP-MIB.icmpInSrcQuenchs,0,icmpInSrcQuenchs,.1.3.6.1.2.1.5.6.0
+16716,42312,IP-MIB.icmpInTimeExcds,0,icmpInTimeExcds,.1.3.6.1.2.1.5.4.0
+16716,42313,IP-MIB.icmpInTimestampReps,0,icmpInTimestampReps,.1.3.6.1.2.1.5.11.0
+16716,42314,IP-MIB.icmpInTimestamps,0,icmpInTimestamps,.1.3.6.1.2.1.5.10.0
+16716,42315,IP-MIB.icmpOutAddrMaskReps,0,icmpOutAddrMaskReps,.1.3.6.1.2.1.5.26.0
+16716,42316,IP-MIB.icmpOutAddrMasks,0,icmpOutAddrMasks,.1.3.6.1.2.1.5.25.0
+16716,42317,IP-MIB.icmpOutDestUnreachs,0,icmpOutDestUnreachs,.1.3.6.1.2.1.5.16.0
+16716,42318,IP-MIB.icmpOutEchoReps,0,icmpOutEchoReps,.1.3.6.1.2.1.5.22.0
+16716,42319,IP-MIB.icmpOutEchos,0,icmpOutEchos,.1.3.6.1.2.1.5.21.0
+16716,42320,IP-MIB.icmpOutErrors,0,icmpOutErrors,.1.3.6.1.2.1.5.15.0
+16716,42321,IP-MIB.icmpOutMsgs,0,icmpOutMsgs,.1.3.6.1.2.1.5.14.0
+16716,42322,IP-MIB.icmpOutParmProbs,0,icmpOutParmProbs,.1.3.6.1.2.1.5.18.0
+16716,42323,IP-MIB.icmpOutRedirects,0,icmpOutRedirects,.1.3.6.1.2.1.5.20.0
+16716,42324,IP-MIB.icmpOutSrcQuenchs,0,icmpOutSrcQuenchs,.1.3.6.1.2.1.5.19.0
+16716,42325,IP-MIB.icmpOutTimeExcds,0,icmpOutTimeExcds,.1.3.6.1.2.1.5.17.0
+16716,42326,IP-MIB.icmpOutTimestampReps,0,icmpOutTimestampReps,.1.3.6.1.2.1.5.24.0
+16716,42327,IP-MIB.icmpOutTimestamps,0,icmpOutTimestamps,.1.3.6.1.2.1.5.23.0
+16716,42328,IP-MIB.ipForwDatagrams,0,ipForwDatagrams,.1.3.6.1.2.1.4.6.0
+16716,42329,IP-MIB.ipInAddrErrors,0,ipInAddrErrors,.1.3.6.1.2.1.4.5.0
+16716,42330,IP-MIB.ipInDelivers,0,ipInDelivers,.1.3.6.1.2.1.4.9.0
+16716,42331,IP-MIB.ipInDiscards,0,ipInDiscards,.1.3.6.1.2.1.4.8.0
+16716,42332,IP-MIB.ipInHdrErrors,0,ipInHdrErrors,.1.3.6.1.2.1.4.4.0
+16716,42333,IP-MIB.ipInReceives,0,ipInReceives,.1.3.6.1.2.1.4.3.0
+16716,42334,IP-MIB.ipInUnknownProtos,0,ipInUnknownProtos,.1.3.6.1.2.1.4.7.0
+16716,42335,IP-MIB.ipOutDiscards,0,ipOutDiscards,.1.3.6.1.2.1.4.11.0
+16716,42336,IP-MIB.ipOutNoRoutes,0,ipOutNoRoutes,.1.3.6.1.2.1.4.12.0
+16716,42337,IP-MIB.ipOutRequests,0,ipOutRequests,.1.3.6.1.2.1.4.10.0
+16716,42338,IP-MIB.ipReasmFails,0,ipReasmFails,.1.3.6.1.2.1.4.16.0
+16716,42339,IP-MIB.ipReasmOKs,0,ipReasmOKs,.1.3.6.1.2.1.4.15.0
+16716,42340,IP-MIB.ipReasmReqds,0,ipReasmReqds,.1.3.6.1.2.1.4.14.0
+16716,42341,SNMPv2-MIB.sysDescr,Linux dena-devops 4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64,sysDescr,.1.3.6.1.2.1.1.1.0
+16716,42342,SNMPv2-MIB.sysName,dena-devops,sysName,.1.3.6.1.2.1.1.5.0
+16716,42343,icmppingloss,0.0000,ICMP loss,
+16716,42344,icmppingsec,0.0059,ICMP response time,

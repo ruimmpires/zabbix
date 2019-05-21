@@ -1,0 +1,69 @@
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "hostid": "16612",
+            "host": "Cisco7200",
+            "interfaces": [
+                {
+                    "ip": "10.9.227.104"
+                }
+            ]
+        },
+        {
+            "hostid": "16705",
+            "host": "CiscoASR",
+            "interfaces": [
+                {
+                    "ip": "10.9.227.102"
+                }
+            ]
+        },
+        {
+            "hostid": "16712",
+            "host": "fiespmvm95",
+            "interfaces": [
+                {
+                    "ip": "10.129.211.76"
+                }
+            ]
+        },
+        {
+            "hostid": "16713",
+            "host": "fiespmvm89",
+            "interfaces": [
+                {
+                    "ip": "10.129.212.44"
+                }
+            ]
+        },
+        {
+            "hostid": "16714",
+            "host": "fiespmvm66",
+            "interfaces": [
+                {
+                    "ip": "10.129.212.171"
+                }
+            ]
+        },
+        {
+            "hostid": "16715",
+            "host": "JuniperMX480",
+            "interfaces": [
+                {
+                    "ip": "10.9.227.103"
+                }
+            ]
+        },
+        {
+            "hostid": "16716",
+            "host": "dena-devops",
+            "interfaces": [
+                {
+                    "ip": "10.129.211.44"
+                }
+            ]
+        }
+    ],
+    "id": 1
+}

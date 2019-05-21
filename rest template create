@@ -1,0 +1,91 @@
+AUTHENTICATION
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0","method": "user.login",
+    "params": {"user": "Admin","password": "zabbix"},            
+    "id": 1,"auth": null
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oPw '(?<=result":\s")[^"]+'
+
+ANSWER:
+51868a73a28d5c2674e121bbc7cb9169
+
+
+CREATE A DISCOVERY RULE
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "drule.create",
+    "params": {
+        "name": "Juniper discovery2",
+        "proxy_hostid": "0",
+        "iprange": "10.9.227.0/24",
+        "delay": "300",
+        "nextcheck": "0",
+        "status": "0",
+        "dchecks": [
+            {
+                "type": "11",
+                "key_": "1.3.6.1.4.1.2636.3.1.2.0",
+                "snmp_community": "public",
+                "ports": "161"
+            }
+        ]
+    },
+    "auth": "51868a73a28d5c2674e121bbc7cb9169",
+    "id": 1
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+
+ANSWER:
+{
+    "jsonrpc": "2.0",
+    "result": {
+        "druleids": [
+            "15"
+        ]
+    },
+    "id": 1
+}
+
+
+
+
+UPDATE A DISCOVERY RULE
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "drule.update",
+    "params": {
+        "druleid": "14",
+        "proxy_hostid": "0",
+        "iprange": "10.9.227.0/24",
+        "delay": "300",
+        "nextcheck": "0",
+        "status": "0",
+        "dchecks": [
+            {
+                "type": "11",
+                "key_": "1.3.6.1.4.1.2636.3.1.2.0",
+                "snmp_community": "public",
+                "ports": "161"
+            }
+        ]
+    },
+    "auth": "51868a73a28d5c2674e121bbc7cb9169",
+    "id": 1
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+
+
+READ DISCOVERY RULES
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "drule.get",
+    "params": {
+        "output": "extend",
+        "selectDChecks": "extend"
+    },
+    "auth": "51868a73a28d5c2674e121bbc7cb9169",
+    "id": 1
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
