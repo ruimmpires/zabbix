@@ -1,0 +1,599 @@
+#AUTHENTICATION
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0","method": "user.login",
+    "params": {"user": "Admin","password": "zabbix"},
+    "id": 1,"auth": null
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oPw '(?<=result":\s")[^"]+'
+
+6d2220f6b345b895a69d2a5eb2defa34
+
+________________________________________________________________________
+#GET TEMPLATE ID
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0", "method": "template.get",
+    "params": {"output": ["host"],
+    "filter": {"host": ["MADBSM template"]}
+    },"id": 1, "auth": "6d2220f6b345b895a69d2a5eb2defa34"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool | grep -oP '(?<=templateid":\s")[0-9]+'
+
+10107
+
+________________________________________________________________________
+#GET HOST IDS
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0", "method": "host.get",
+    "params": {"output": ["hostid", "host", "itemids"],"selectInterfaces": ["ip"], "templateids":"10107"},
+    "id": 1,"auth": "6d2220f6b345b895a69d2a5eb2defa34"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool 
+
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "hostid": "10108",
+            "host": "fiespmvm95",
+            "interfaces": [
+                {
+                    "ip": "10.129.211.76"
+                }
+            ]
+        },
+        {
+            "hostid": "10109",
+            "host": "10.129.211.44",
+            "interfaces": [
+                {
+                    "ip": "10.129.211.44"
+                }
+            ]
+        },
+        {
+            "hostid": "10110",
+            "host": "10.129.212.44",
+            "interfaces": [
+                {
+                    "ip": "10.129.212.44"
+                }
+            ]
+        },
+        {
+            "hostid": "10111",
+            "host": "fiespvm66.int.net.nokia.com",
+            "interfaces": [
+                {
+                    "ip": "10.129.212.171"
+                }
+            ]
+        }
+    ],
+    "id": 1
+}
+
+
+#AFTER FILTERING with | grep -oP '(?<=hostid":\s")[0-9]+'
+10108
+10109
+10110
+10111
+
+___________________________________________________________________________________________________________
+#GET ITEM IDS
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "item.get",
+    "params": {
+        "output":["hostid","itemid","snmp_oid","name","key_","lastvalue"],
+        "hostids": ["10108", "10109","10110", "10111"],
+        "search": {"key_":["ipForwDatagrams","ipInAddrErrors","ipInDelivers","ipInDiscards","ipInHdrErrors","ipInReceives","ipInUnknownProtos","ipOutDiscards","ipOutNoRoutes","ipOutRequests","ipReasmFails","ipReasmOKs","ipReasmReqds"]},
+        "sortfield": "key_",
+        "searchByAny": true
+    },
+    "id": 1, "auth": "6d2220f6b345b895a69d2a5eb2defa34"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "itemid": "24876",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.6.0",
+            "name": "ipForwDatagrams",
+            "key_": "IP-MIB.ipForwDatagrams",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24679",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.6.0",
+            "name": "ipForwDatagrams",
+            "key_": "IP-MIB.ipForwDatagrams",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24424",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.6.0",
+            "name": "ipForwDatagrams",
+            "key_": "IP-MIB.ipForwDatagrams",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25284",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.6.0",
+            "name": "ipForwDatagrams",
+            "key_": "IP-MIB.ipForwDatagrams",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24878",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.5.0",
+            "name": "ipInAddrErrors",
+            "key_": "IP-MIB.ipInAddrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24425",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.5.0",
+            "name": "ipInAddrErrors",
+            "key_": "IP-MIB.ipInAddrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24681",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.5.0",
+            "name": "ipInAddrErrors",
+            "key_": "IP-MIB.ipInAddrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25286",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.5.0",
+            "name": "ipInAddrErrors",
+            "key_": "IP-MIB.ipInAddrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24879",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.9.0",
+            "name": "ipInDelivers",
+            "key_": "IP-MIB.ipInDelivers",
+            "lastvalue": "7446226"
+        },
+        {
+            "itemid": "24426",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.9.0",
+            "name": "ipInDelivers",
+            "key_": "IP-MIB.ipInDelivers",
+            "lastvalue": "133952173"
+        },
+        {
+            "itemid": "24682",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.9.0",
+            "name": "ipInDelivers",
+            "key_": "IP-MIB.ipInDelivers",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25287",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.9.0",
+            "name": "ipInDelivers",
+            "key_": "IP-MIB.ipInDelivers",
+            "lastvalue": "507694282"
+        },
+        {
+            "itemid": "24880",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.8.0",
+            "name": "ipInDiscards",
+            "key_": "IP-MIB.ipInDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24427",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.8.0",
+            "name": "ipInDiscards",
+            "key_": "IP-MIB.ipInDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24683",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.8.0",
+            "name": "ipInDiscards",
+            "key_": "IP-MIB.ipInDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25288",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.8.0",
+            "name": "ipInDiscards",
+            "key_": "IP-MIB.ipInDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24881",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.4.0",
+            "name": "ipInHdrErrors",
+            "key_": "IP-MIB.ipInHdrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24428",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.4.0",
+            "name": "ipInHdrErrors",
+            "key_": "IP-MIB.ipInHdrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24684",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.4.0",
+            "name": "ipInHdrErrors",
+            "key_": "IP-MIB.ipInHdrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25289",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.4.0",
+            "name": "ipInHdrErrors",
+            "key_": "IP-MIB.ipInHdrErrors",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24882",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.3.0",
+            "name": "ipInReceives",
+            "key_": "IP-MIB.ipInReceives",
+            "lastvalue": "7831477"
+        },
+        {
+            "itemid": "24429",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.3.0",
+            "name": "ipInReceives",
+            "key_": "IP-MIB.ipInReceives",
+            "lastvalue": "147585652"
+        },
+        {
+            "itemid": "24685",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.3.0",
+            "name": "ipInReceives",
+            "key_": "IP-MIB.ipInReceives",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25290",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.3.0",
+            "name": "ipInReceives",
+            "key_": "IP-MIB.ipInReceives",
+            "lastvalue": "521316324"
+        },
+        {
+            "itemid": "24883",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.7.0",
+            "name": "ipInUnknownProtos",
+            "key_": "IP-MIB.ipInUnknownProtos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24430",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.7.0",
+            "name": "ipInUnknownProtos",
+            "key_": "IP-MIB.ipInUnknownProtos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24686",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.7.0",
+            "name": "ipInUnknownProtos",
+            "key_": "IP-MIB.ipInUnknownProtos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25291",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.7.0",
+            "name": "ipInUnknownProtos",
+            "key_": "IP-MIB.ipInUnknownProtos",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24884",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.11.0",
+            "name": "ipOutDiscards",
+            "key_": "IP-MIB.ipOutDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24431",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.11.0",
+            "name": "ipOutDiscards",
+            "key_": "IP-MIB.ipOutDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24687",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.11.0",
+            "name": "ipOutDiscards",
+            "key_": "IP-MIB.ipOutDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25292",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.11.0",
+            "name": "ipOutDiscards",
+            "key_": "IP-MIB.ipOutDiscards",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24885",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.12.0",
+            "name": "ipOutNoRoutes",
+            "key_": "IP-MIB.ipOutNoRoutes",
+            "lastvalue": "3"
+        },
+        {
+            "itemid": "24432",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.12.0",
+            "name": "ipOutNoRoutes",
+            "key_": "IP-MIB.ipOutNoRoutes",
+            "lastvalue": "3"
+        },
+        {
+            "itemid": "24688",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.12.0",
+            "name": "ipOutNoRoutes",
+            "key_": "IP-MIB.ipOutNoRoutes",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25293",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.12.0",
+            "name": "ipOutNoRoutes",
+            "key_": "IP-MIB.ipOutNoRoutes",
+            "lastvalue": "3"
+        },
+        {
+            "itemid": "24886",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.10.0",
+            "name": "ipOutRequests",
+            "key_": "IP-MIB.ipOutRequests",
+            "lastvalue": "5768285"
+        },
+        {
+            "itemid": "24433",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.10.0",
+            "name": "ipOutRequests",
+            "key_": "IP-MIB.ipOutRequests",
+            "lastvalue": "190837523"
+        },
+        {
+            "itemid": "24689",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.10.0",
+            "name": "ipOutRequests",
+            "key_": "IP-MIB.ipOutRequests",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25294",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.10.0",
+            "name": "ipOutRequests",
+            "key_": "IP-MIB.ipOutRequests",
+            "lastvalue": "1219903791"
+        },
+        {
+            "itemid": "24887",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.16.0",
+            "name": "ipReasmFails",
+            "key_": "IP-MIB.ipReasmFails",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24434",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.16.0",
+            "name": "ipReasmFails",
+            "key_": "IP-MIB.ipReasmFails",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24690",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.16.0",
+            "name": "ipReasmFails",
+            "key_": "IP-MIB.ipReasmFails",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25295",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.16.0",
+            "name": "ipReasmFails",
+            "key_": "IP-MIB.ipReasmFails",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "24888",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.15.0",
+            "name": "ipReasmOKs",
+            "key_": "IP-MIB.ipReasmOKs",
+            "lastvalue": "216"
+        },
+        {
+            "itemid": "24435",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.15.0",
+            "name": "ipReasmOKs",
+            "key_": "IP-MIB.ipReasmOKs",
+            "lastvalue": "182648"
+        },
+        {
+            "itemid": "24691",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.15.0",
+            "name": "ipReasmOKs",
+            "key_": "IP-MIB.ipReasmOKs",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25296",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.15.0",
+            "name": "ipReasmOKs",
+            "key_": "IP-MIB.ipReasmOKs",
+            "lastvalue": "1867"
+        },
+        {
+            "itemid": "24889",
+            "hostid": "10110",
+            "snmp_oid": ".1.3.6.1.2.1.4.14.0",
+            "name": "ipReasmReqds",
+            "key_": "IP-MIB.ipReasmReqds",
+            "lastvalue": "432"
+        },
+        {
+            "itemid": "24436",
+            "hostid": "10108",
+            "snmp_oid": ".1.3.6.1.2.1.4.14.0",
+            "name": "ipReasmReqds",
+            "key_": "IP-MIB.ipReasmReqds",
+            "lastvalue": "375503"
+        },
+        {
+            "itemid": "24692",
+            "hostid": "10109",
+            "snmp_oid": ".1.3.6.1.2.1.4.14.0",
+            "name": "ipReasmReqds",
+            "key_": "IP-MIB.ipReasmReqds",
+            "lastvalue": "0"
+        },
+        {
+            "itemid": "25297",
+            "hostid": "10111",
+            "snmp_oid": ".1.3.6.1.2.1.4.14.0",
+            "name": "ipReasmReqds",
+            "key_": "IP-MIB.ipReasmReqds",
+            "lastvalue": "3734"
+        }
+    ],
+    "id": 1
+}
+
+___________________________________________________________________________________________________________
+#get the values with history
+curl -s -X POST -H 'Content-Type: application/json' -d '
+{
+    "jsonrpc": "2.0",
+    "method": "history.get",
+    "params": {
+        "output": "extend",
+        "itemids": ["24436","24692","25297"],
+        "time_from": "1558440900",
+        "sortfield": "itemid",
+        "searchByAny": true
+    },
+    "id": 1,
+    "auth": "6d2220f6b345b895a69d2a5eb2defa34"
+}' http://10.32.227.201/zabbix/api_jsonrpc.php | python -mjson.tool
+
+
+USE time -300:
+hist=300
+now=$(date +%s)
+echo time now $now
+before=$(date --date="-$hist seconds" +"%s")
+echo before $before
+
+{
+    "jsonrpc": "2.0",
+    "result": [
+        {
+            "itemid": "24436",
+            "clock": "1558440902",
+            "value": "375540",
+            "ns": "268819451"
+        },
+        {
+            "itemid": "24436",
+            "clock": "1558441202",
+            "value": "375579",
+            "ns": "732454218"
+        },
+        {
+            "itemid": "24436",
+            "clock": "1558441502",
+            "value": "375616",
+            "ns": "174221297"
+        },
+        {
+            "itemid": "24436",
+            "clock": "1558441802",
+            "value": "375653",
+            "ns": "207929484"
+        },
+        {
+            "itemid": "25297",
+            "clock": "1558440905",
+            "value": "3734",
+            "ns": "547251197"
+        },
+        {
+            "itemid": "25297",
+            "clock": "1558441206",
+            "value": "3738",
+            "ns": "11933382"
+        },
+        {
+            "itemid": "25297",
+            "clock": "1558441505",
+            "value": "3740",
+            "ns": "667468491"
+        },
+        {
+            "itemid": "25297",
+            "clock": "1558441805",
+            "value": "3742",
+            "ns": "647086432"
+        }
+    ],
+    "id": 1
+}
